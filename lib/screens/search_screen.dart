@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_practice/widgets/article_container.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_practice/models/article.dart';
+import 'package:flutter_practice/models/user.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -43,6 +45,19 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             // 検索結果一覧
+            ArticleContainer(
+              article: Article(
+                title: 'タイトル',
+                user: User(
+                  id: 'qiita-taro',
+                  profileImageUrl:
+                      'https://firebasestorage.googleapis.com/v0/b/gs-expansion-test.appspot.com/o/unknown_person.png?alt=media',
+                ),
+                createdAt: DateTime.now(),
+                tags: ['タグ1', 'タグ2'],
+                url: 'https://example.com',
+              ),
+            ),
           ],
         ));
   }
