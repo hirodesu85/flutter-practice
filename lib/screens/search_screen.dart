@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_practice/models/article.dart';
-import 'package:flutter_practice/models/user.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -45,17 +44,11 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             // 検索結果一覧
-            ArticleContainer(
-              article: Article(
-                title: 'タイトル',
-                user: User(
-                  id: 'qiita-taro',
-                  profileImageUrl:
-                      'https://firebasestorage.googleapis.com/v0/b/gs-expansion-test.appspot.com/o/unknown_person.png?alt=media',
-                ),
-                createdAt: DateTime.now(),
-                tags: ['タグ1', 'タグ2'],
-                url: 'https://example.com',
+            Expanded(
+              child: ListView(
+                children: articles
+                    .map((article) => ArticleContainer(article: article))
+                    .toList(),
               ),
             ),
           ],
@@ -69,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
       'per_page': '10',
     });
 
-    final String token = dotenv.env['QIITA_API_TOKEN'] ?? '';
+    final String token = dotenv.env['QIITA_ACCESS_TOKEN'] ?? '';
 
     // 2. Qiita APIにリクエストを送信
     final http.Response response = await http.get(

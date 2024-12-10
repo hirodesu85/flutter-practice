@@ -41,7 +41,7 @@ class ArticleContainer extends StatelessWidget {
             // タイトル
             Text(
               article.title,
-              maxLines: 2,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 color: Colors.white,
@@ -52,6 +52,8 @@ class ArticleContainer extends StatelessWidget {
             // タグ
             Text(
               '#${article.tags.join(' #')}',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 color: Colors.white,
                 fontStyle: FontStyle.italic,
